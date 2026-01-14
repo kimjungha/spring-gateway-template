@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: spring-gateway-template
+
+management:
+    endpoints:
+      web:
+        exposure:
+          include: health
+api:
+  domain:
+    delivery: https://delivery.jungha.com
+    customer: https://customers.jungha.com
