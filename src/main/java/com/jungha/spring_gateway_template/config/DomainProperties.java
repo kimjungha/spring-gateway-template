@@ -1,15 +1,10 @@
 package com.jungha.spring_gateway_template.config;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
-@Getter
-@Setter
-@Component
+import java.net.URI;
+import java.util.Map;
+
 @ConfigurationProperties("api.domain")
-public class DomainProperties {
-    private String delivery;
-    private String customer;
+public record DomainProperties(Map<String, URI> domain) {
 }
