@@ -4,6 +4,7 @@
 - CPU 작업이 아닌 네트워크 I/O (inbound/outbound) 를 기다리는데 쓰는 서버이다.
 - 즉 gateway 는 I/O 최적화 서버가 필요하다. (I/O 대기중에 스레드를 점유하지 않는 모델이 유리) 
 - 코드기반 라우팅은 `@Configuration + RouteLocator Bean` 을 만들고 "라우팅전용패키지"에 둔다.
+- 요청을 중개하는것과 더불어, 공통 관심사 처리에도 목적이 있다 (인증/인가, Rate Limit, CORS, 로깅, 장애차단) 
 
 
 ### Tomcat vs Netty
@@ -17,6 +18,7 @@
 | 메모리 | 스레드마다 스택 할당 | 스레드 수가 적어서 효율적 |
 
 Java 21 이상에서 spring.threads.virtual.enabled=true를 설정하면, MVC도 I/O 대기 중에 OS 스레드를 점유하지 않는다.
+즉 Gateway 는 전통적으로 WebFlux 가 정답이었지만, 지금은 MVC +Virtual Thread 구조로도 가능하다. 
 
 ### Tomcat MVC
 
