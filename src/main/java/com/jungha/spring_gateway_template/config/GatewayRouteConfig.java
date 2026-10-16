@@ -16,22 +16,22 @@ public class GatewayRouteConfig {
     @Bean
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("user-service-mock", r -> r
+                .route("user-server-connect", r -> r
                         .path("/users/**")
                         .filters(f -> f.filter((exchange, chain) -> {
                             exchange.getResponse().setStatusCode(HttpStatus.OK);
-                            exchange.getResponse().getHeaders().add("X-Mock", "gateway-routing-test");
+                            exchange.getResponse().getHeaders().add("X-Mock", "Success Gateway Test : Users Domain");
                             return exchange.getResponse().setComplete();
                         }))
                         .uri("http://example.org") // 실제로 호출되지 않음
                 )
-                .route("delivery-service", r -> r
+                .route("delivery-server-connect", r -> r
                         .path("/delivery/**")
-                        .uri(domainProperties.getDelivery())
+                        .uri(domainProperties.domain().get("delivery"))
                 )
-                .route("customer-service", r->r
+                .route("customer-server-connect", r->r
                         .path("/customer/**")
-                        .uri(domainProperties.getCustomer())
+                        .uri(domainProperties.domain().get("inventory"))
                 )
                 .build();
     }
