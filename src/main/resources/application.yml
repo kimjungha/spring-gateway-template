@@ -9,5 +9,7 @@ management:
           include: health
 api:
   domain:
+    users: https://users.jungha.com
     delivery: https://delivery.jungha.com
-    customer: https://customers.jungha.com
+    inventory: https://inventory.jungha.com
+    admin: ${ADMIN_URL} # 내부 IP 의 경우 Secret 값으로 등록
