@@ -3,13 +3,19 @@ spring:
     name: spring-gateway-template
 
 management:
+    endpoint:
+      gateway:
+        enabled: true
     endpoints:
       web:
         exposure:
-          include: health
+          include: health,gateway,metrics
 api:
   domain:
     users: https://users.jungha.com
     delivery: https://delivery.jungha.com
     inventory: https://inventory.jungha.com
-    admin: ${ADMIN_URL} # 내부 IP 의 경우 Secret 값으로 등록
+    admin: ${ADMIN_URL:http://localhost:9000} # 내부 IP 의 경우 Secret 값으로 등록
+
+jwt:
+  secret: ${JWT_SECRET:test-secret-key-for-local-only-me}
